@@ -122,16 +122,14 @@ Format:
       return `\n${title}\n${questions.map((q, i) => `${i + 1}. ${q.text}`).join('\n')}`
     }
 
-    const formattedText = `🎯 Conversation Sparks
-
+    const formattedText = `🌟 Conversation Sparks
 ${contextSummary}
-${formatQuestions(icebreakers, '\n🌟 Icebreakers')}
-${formatQuestions(intermediate, '\n💭 Intermediate Questions')}
-${formatQuestions(deep, '\n🔮 Deep Questions')}
-${formatQuestions(connection, '\n🤝 Connection Questions')}
+${formatQuestions(icebreakers, '\n🧊 Icebreakers')}
+${formatQuestions(intermediate, '\n💭 Intermediate')}
+${formatQuestions(deep, '\n🔮 Deep')}
+${formatQuestions(connection, '\n🤝 Connection')}
 
-Generated with Conversation Sparks
-https://github.com/spark-template`
+from https://conversation-spark--csfromcs.github.app/`
 
     try {
       await navigator.clipboard.writeText(formattedText)
@@ -285,7 +283,7 @@ https://github.com/spark-template`
             >
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-medium">Your Questions</h2>
-                <div className="flex gap-2">
+                <div className="flex gap-1">
                   <Button
                     onClick={copyAllToClipboard}
                     variant="default"
