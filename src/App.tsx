@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Chats, Sparkle, ShootingStar, ArrowClockwise, CopySimple, Check } from '@phosphor-icons/react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -35,17 +35,38 @@ interface SocialContext {
   closeness: string
 }
 
+function getContextFromURL(): SocialContext {
+  const params = new URLSearchParams(window.location.search)
+  return {
+    groupSize: params.get('groupSize') || '',
+    ageRange: params.get('ageRange') || '',
+    vibe: params.get('vibe') || '',
+    interests: params.get('interests') || '',
+    closeness: params.get('closeness') || ''
+  }
+}
+
+function updateURL(context: SocialContext) {
+  const params = new URLSearchParams()
+  if (context.groupSize) params.set('groupSize', context.groupSize)
+  if (context.ageRange) params.set('ageRange', context.ageRange)
+  if (context.vibe) params.set('vibe', context.vibe)
+  if (context.interests) params.set('interests', context.interests)
+  if (context.closeness) params.set('closeness', context.closeness)
+  
+  const newURL = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname
+  window.history.replaceState({}, '', newURL)
+}
+
 function App() {
-  const [context, setContext] = useState<SocialContext>({
-    groupSize: '',
-    ageRange: '',
-    vibe: '',
-    interests: '',
-    closeness: ''
-  })
+  const [context, setContext] = useState<SocialContext>(getContextFromURL)
   const [questions, setQuestions] = useState<Question[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [copiedAll, setCopiedAll] = useState(false)
+
+  useEffect(() => {
+    updateURL(context)
+  }, [context])
 
   const generateQuestions = async (makeUnique = false) => {
     if (!context.groupSize && !context.ageRange && !context.vibe && !context.interests && !context.closeness) {

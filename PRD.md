@@ -33,6 +33,13 @@ A web app that generates contextually relevant conversation questions based on t
 - **Progression**: Questions appear → user reads/shares → can copy individual questions and entire set → can generate new set
 - **Success criteria**: Questions are readable, difficulty levels are clear, individual questions can be copied
 
+### URL-Based Context Sharing
+- **Functionality**: Encodes social context in URL query parameters and prefills form from URL on load
+- **Purpose**: Allows users to share pre-configured contexts with others via link
+- **Trigger**: User modifies any context field or shares URL with query parameters
+- **Progression**: User fills context → URL updates automatically → user shares link → recipient opens link with prefilled context → can generate questions immediately
+- **Success criteria**: URL updates smoothly without page reload, all context fields properly encode/decode, shared links open with correct prefilled values
+
 ## Edge Case Handling
 - **Empty Context**: If minimal context provided, generate general but still useful questions
 - **Inappropriate Requests**: Filter out context that might lead to uncomfortable questions
