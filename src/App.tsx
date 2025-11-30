@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Chats, Sparkle, ArrowClockwise } from '@phosphor-icons/react'
+import { Chats, Sparkle, ArrowClockwise, CopySimple, Check } from '@phosphor-icons/react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -45,6 +45,7 @@ function App() {
   })
   const [questions, setQuestions] = useState<Question[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [copiedAll, setCopiedAll] = useState(false)
 
   const generateQuestions = async () => {
     if (!context.groupSize && !context.ageRange && !context.vibe && !context.interests && !context.closeness) {
@@ -99,6 +100,46 @@ Format:
       toast.error('Failed to generate questions. Please try again.')
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const copyAllToClipboard = async () => {
+    const icebreakers = questions.filter(q => q.difficulty === 'icebreaker')
+    const intermediate = questions.filter(q => q.difficulty === 'intermediate')
+    const deep = questions.filter(q => q.difficulty === 'deep')
+    const connection = questions.filter(q => q.difficulty === 'connection')
+
+    const contextSummary = [
+      context.groupSize && `Group Size: ${context.groupSize}`,
+      context.ageRange && `Age Range: ${context.ageRange}`,
+      context.closeness && `Closeness: ${context.closeness}`,
+      context.vibe && `Vibe: ${context.vibe}`,
+      context.interests && `Interests: ${context.interests}`
+    ].filter(Boolean).join('\n')
+
+    const formatQuestions = (questions: Question[], title: string) => {
+      if (questions.length === 0) return ''
+      return `\n${title}\n${questions.map((q, i) => `${i + 1}. ${q.text}`).join('\n')}`
+    }
+
+    const formattedText = `🎯 Conversation Sparks
+
+${contextSummary}
+${formatQuestions(icebreakers, '\n🌟 Icebreakers')}
+${formatQuestions(intermediate, '\n💭 Intermediate Questions')}
+${formatQuestions(deep, '\n🔮 Deep Questions')}
+${formatQuestions(connection, '\n🤝 Connection Questions')}
+
+Generated with Conversation Sparks
+https://github.com/spark-template`
+
+    try {
+      await navigator.clipboard.writeText(formattedText)
+      setCopiedAll(true)
+      toast.success('All questions copied to clipboard!')
+      setTimeout(() => setCopiedAll(false), 2000)
+    } catch (error) {
+      toast.error('Failed to copy')
     }
   }
 
@@ -244,14 +285,33 @@ Format:
             >
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-medium">Your Questions</h2>
-                <Button
-                  onClick={generateQuestions}
-                  variant="outline"
-                  size="sm"
-                >
-                  <ArrowClockwise className="mr-2" />
-                  Regenerate
-                </Button>
+                <div className="flex gap-2">
+                  <Button
+                    onClick={copyAllToClipboard}
+                    variant="default"
+                    size="sm"
+                  >
+                    {copiedAll ? (
+                      <>
+                        <Check className="mr-2" weight="bold" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <CopySimple className="mr-2" />
+                        Copy All
+                      </>
+                    )}
+                  </Button>
+                  <Button
+                    onClick={generateQuestions}
+                    variant="outline"
+                    size="sm"
+                  >
+                    <ArrowClockwise className="mr-2" />
+                    Regenerate
+                  </Button>
+                </div>
               </div>
 
               <div className="space-y-4">
