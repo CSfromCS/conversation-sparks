@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Chats, Sparkle, CopySimple, Check } from '@phosphor-icons/react'
+import { Dog, Cat, ShootingStar, ArrowClockwise, CopySimple, Check } from '@phosphor-icons/react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -131,12 +131,12 @@ Format:
       return `\n${title}\n${questions.map((q, i) => `${i + 1}. ${q.text}`).join('\n')}`
     }
 
-    const formattedText = `🌟 Conversation Sparks
+    const formattedText = `🌟 Conversation Sparks 🌟 
 ${contextSummary}
-${formatQuestions(icebreakers, '\n🧊 Icebreakers')}
-${formatQuestions(intermediate, '\n💭 Intermediate')}
-${formatQuestions(deep, '\n🔮 Deep')}
-${formatQuestions(connection, '\n🤝 Connection')}
+${formatQuestions(icebreakers, '🧊 Icebreakers')}
+${formatQuestions(intermediate, '💭 Intermediate')}
+${formatQuestions(deep, '🔮 Deep')}
+${formatQuestions(connection, '🤝 Connection')}
 
 from https://conversation-spark--csfromcs.github.app/`
 
@@ -156,10 +156,11 @@ from https://conversation-spark--csfromcs.github.app/`
       <div className="max-w-4xl mx-auto space-y-8">
         <header className="text-center space-y-3">
           <div className="flex items-center justify-center gap-3">
-            <Chats className="text-primary" size={40} weight="duotone" />
+            <Dog className="text-primary" size={40} weight="duotone" />
             <h1 className="text-4xl font-semibold tracking-tight text-foreground">
               Conversation Sparks
             </h1>
+            <Cat className="text-primary" size={40} weight="duotone" />
           </div>
           <p className="text-lg text-muted-foreground">
             Asking the right questions to spark actually meaningful conversations.
@@ -168,7 +169,7 @@ from https://conversation-spark--csfromcs.github.app/`
 
         <Card className="p-6 md:p-8 space-y-3">
           <div>
-            <h2 className="text-2xl font-medium mb-2">Who's playing? 😊</h2>
+            <h2 className="text-2xl font-medium mb-2">Who's playing?</h2>
             <p className="text-sm text-muted-foreground">
               Tell us about your group. Feel free to leave some empty.
             </p>
@@ -258,7 +259,7 @@ from https://conversation-spark--csfromcs.github.app/`
               <>Generating...</>
             ) : (
               <>
-                <Sparkle className="mr-2" weight="fill" />
+                <ShootingStar className="mr-0" weight="fill" />
                 Generate Questions
               </>
             )}
@@ -315,7 +316,7 @@ from https://conversation-spark--csfromcs.github.app/`
                     variant="outline"
                     size="sm"
                   >
-                    <Sparkle className="mr-2" weight="fill" />
+                    <ArrowClockwise className="mr-2" />
                     More Unique!
                   </Button>
                 </div>
