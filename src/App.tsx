@@ -153,6 +153,15 @@ Format:
       return `\n${title}\n${questions.map((q, i) => `${i + 1}. ${q.text}`).join('\n')}`
     }
 
+    const params = new URLSearchParams()
+    if (context.groupSize) params.set('groupSize', context.groupSize)
+    if (context.ageRange) params.set('ageRange', context.ageRange)
+    if (context.vibe) params.set('vibe', context.vibe)
+    if (context.interests) params.set('interests', context.interests)
+    if (context.closeness) params.set('closeness', context.closeness)
+    
+    const currentURL = `${window.location.origin}${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`
+
     const formattedText = `🌟 Conversation Sparks 🌟 
 ${contextSummary}
 ${formatQuestions(icebreakers, '🧊 Icebreakers')}
@@ -160,7 +169,7 @@ ${formatQuestions(intermediate, '💭 Intermediate')}
 ${formatQuestions(deep, '🔮 Deep')}
 ${formatQuestions(connection, '🤝 Connection')}
 
-from https://conversation-spark--csfromcs.github.app/`
+from [Conversation Sparks](${currentURL})`
 
     try {
       await navigator.clipboard.writeText(formattedText)
