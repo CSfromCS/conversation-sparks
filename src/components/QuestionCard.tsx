@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 
 interface Question {
   text: string
-  difficulty: 'icebreaker' | 'intermediate' | 'deep'
+  difficulty: 'icebreaker' | 'intermediate' | 'deep' | 'connection'
 }
 
 interface QuestionCardProps {
@@ -19,13 +19,15 @@ interface QuestionCardProps {
 const difficultyColors = {
   icebreaker: 'bg-secondary text-secondary-foreground',
   intermediate: 'bg-primary/20 text-primary border-primary/30',
-  deep: 'bg-accent text-accent-foreground'
+  deep: 'bg-accent text-accent-foreground',
+  connection: 'bg-accent text-accent-foreground'
 }
 
 const difficultyLabels = {
   icebreaker: 'Icebreaker',
   intermediate: 'Intermediate',
-  deep: 'Deep'
+  deep: 'Deep',
+  connection: 'Connection'
 }
 
 export function QuestionCard({ question, index }: QuestionCardProps) {

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectSeparator} from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
 import { QuestionCard } from '@/components/QuestionCard'
 import { Toaster, toast } from 'sonner'
@@ -24,7 +24,7 @@ const spark = window.spark
 
 interface Question {
   text: string
-  difficulty: 'icebreaker' | 'intermediate' | 'deep'
+  difficulty: 'icebreaker' | 'intermediate' | 'deep' | 'connection'
 }
 
 interface SocialContext {
@@ -55,7 +55,7 @@ function App() {
     setIsLoading(true)
     
     try {
-      const prompt = spark.llmPrompt`You are a thoughtful conversation facilitator. Generate exactly 10 conversation questions based on the following social context:
+      const prompt = spark.llmPrompt`You are a thoughtful conversation facilitator. Generate exactly 8 conversation questions based on the following social context:
 
 Group Size: ${context.groupSize || 'not specified'}
 Age Range: ${context.ageRange || 'not specified'}
@@ -65,8 +65,9 @@ Closeness Level: ${context.closeness || 'acquaintances'}
 
 Generate questions with varying difficulty levels:
 - 2 icebreaker questions (light, easy, fun)
-- 5 intermediate questions (more engaging, thoughtful)
-- 3 deep questions (philosophical, introspective, meaningful, requires relationship history to answer, connection)
+- 3 intermediate questions (more engaging, thoughtful)
+- 2 deep questions (philosophical or introspective questions that explore values, beliefs, or meaningful life experiences. These should invite reflection.)
+- 1 connection question (reflects on their relationship or what they've learned about each other. This should provide closure and potentially an action item or takeaway.)
 
 Make sure questions are:
 1. Contextually appropriate for the group
@@ -168,8 +169,11 @@ Format:
                   <SelectItem value="acquaintances">Acquaintances</SelectItem>
                   <SelectItem value="friends">Friends</SelectItem>
                   <SelectItem value="close-friends">Close Friends</SelectItem>
+                  <SelectSeparator />
+                  <SelectItem value="partner">Partner</SelectItem>
                   <SelectItem value="family">Family</SelectItem>
                   <SelectItem value="officemates">Officemates</SelectItem>
+                  <SelectItem value="mentorship">Mentorship</SelectItem>
                 </SelectContent>
               </Select>
             </div>
