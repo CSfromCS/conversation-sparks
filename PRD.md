@@ -20,7 +20,7 @@ A web app that generates contextually relevant conversation questions based on t
 - **Success criteria**: All fields are intuitive, optional fields don't block generation, form validates before submission
 
 ### Question Generation
-- **Functionality**: Uses LLM to create 5-7 questions with varying depth levels (icebreaker, intermediate, deep)
+- **Functionality**: Uses LLM to create 10 questions with varying depth levels (icebreaker, intermediate, deep)
 - **Purpose**: Provides conversation starters tailored to the specific group dynamics
 - **Trigger**: User submits context form
 - **Progression**: Form submitted → loading state → questions appear categorized by difficulty → user can regenerate or refine
@@ -30,7 +30,7 @@ A web app that generates contextually relevant conversation questions based on t
 - **Functionality**: Shows generated questions organized by difficulty with visual hierarchy
 - **Purpose**: Makes it easy to scan and select appropriate questions for the current moment
 - **Trigger**: Successful question generation
-- **Progression**: Questions appear → user reads/shares → can copy individual questions → can generate new set
+- **Progression**: Questions appear → user reads/shares → can copy individual questions and entire set → can generate new set
 - **Success criteria**: Questions are readable, difficulty levels are clear, individual questions can be copied
 
 ## Edge Case Handling

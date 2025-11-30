@@ -117,11 +117,11 @@ Format:
           </p>
         </header>
 
-        <Card className="p-6 md:p-8 space-y-6">
+        <Card className="p-6 md:p-8 space-y-3">
           <div>
-            <h2 className="text-2xl font-medium mb-2">Your Social Context</h2>
+            <h2 className="text-2xl font-medium mb-2">Who's playing? 😊</h2>
             <p className="text-sm text-muted-foreground">
-              Tell us about your group to get tailored questions
+              Tell us about your group. Feel free to leave some empty.
             </p>
           </div>
 
@@ -169,6 +169,7 @@ Format:
                   <SelectItem value="friends">Friends</SelectItem>
                   <SelectItem value="close-friends">Close Friends</SelectItem>
                   <SelectItem value="family">Family</SelectItem>
+                  <SelectItem value="officemates">Officemates</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -185,7 +186,7 @@ Format:
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="interests">Shared Interests (Optional)</Label>
+            <Label htmlFor="interests">Shared Interests</Label>
             <Textarea
               id="interests"
               placeholder="e.g., sports, movies, technology, travel..."
