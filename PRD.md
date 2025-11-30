@@ -27,7 +27,7 @@ A web app that generates contextually relevant conversation questions based on t
 - **Success criteria**: Questions feel contextually appropriate, range from light to deep, appear within 3-5 seconds
 
 ### Question Display
-- **Functionality**: Shows generated questions organized by difficulty with visual hierarchy
+- **Purpose**: Makes it easy to scan and select appropriate questions for the current moment
 - **Purpose**: Makes it easy to scan and select appropriate questions for the current moment
 - **Trigger**: Successful question generation
 - **Progression**: Questions appear → user reads/shares → can copy individual questions and entire set → can generate new set
@@ -40,18 +40,17 @@ A web app that generates contextually relevant conversation questions based on t
 - **Progression**: User fills context → URL updates automatically → user shares link → recipient opens link with prefilled context → can generate questions immediately
 - **Success criteria**: URL updates smoothly without page reload, all context fields properly encode/decode, shared links open with correct prefilled values
 
-## Edge Case Handling
+## Edge Case HandlingIf minimal context provided, generate general but still useful questions
 - **Empty Context**: If minimal context provided, generate general but still useful questions
 - **Inappropriate Requests**: Filter out context that might lead to uncomfortable questions
-- **Generation Failures**: Show friendly error with option to retry
+- **Generation Failures**: Show friendly error with option to retryrelevance
 - **Very Large Groups**: Cap or warn about group size for question relevance
 - **Conflicting Context**: If age/interests/vibe conflict, prioritize safety and inclusivity
 
-## Design Direction
+The design should feel warm, approachable, and social - like a conversation facilitator rather than a corporate tool. A balanced interface with generous spacing to avoid feeling cluttered, allowing the questions themselves to be the hero content.
 The design should feel warm, approachable, and social - like a conversation facilitator rather than a corporate tool. A balanced interface with generous spacing to avoid feeling cluttered, allowing the questions themselves to be the hero content.
 
 ## Color Selection
-Analogous warm palette creating a welcoming, social atmosphere that feels inviting and comfortable for group settings.
 
 - **Primary Color**: Warm coral (oklch(0.70 0.15 25)) - Communicates warmth, friendliness, and approachability
 - **Secondary Colors**: Soft peach (oklch(0.85 0.10 45)) for backgrounds and less prominent elements
