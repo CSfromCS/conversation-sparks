@@ -109,11 +109,11 @@ Format:
           <div className="flex items-center justify-center gap-3">
             <Chats className="text-primary" size={40} weight="duotone" />
             <h1 className="text-4xl font-semibold tracking-tight text-foreground">
-              ConvoSpark
+              Conversation Sparks
             </h1>
           </div>
           <p className="text-lg text-muted-foreground">
-            Generate meaningful conversation starters for any social setting
+            Asking the right questions to spark actually meaningful conversations.
           </p>
         </header>
 
@@ -269,7 +269,7 @@ Format:
             rel="noreferrer"
             className="underline underline-offset-4"
           >
-            linkedin.com/in/csfromcs
+            CS by CS
           </a>
         </footer>
       </div>
