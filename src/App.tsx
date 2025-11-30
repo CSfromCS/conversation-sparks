@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Chats, Sparkle, ArrowClockwise, CopySimple, Check } from '@phosphor-icons/react'
+import { Chats, Sparkle, CopySimple, Check } from '@phosphor-icons/react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -47,7 +47,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [copiedAll, setCopiedAll] = useState(false)
 
-  const generateQuestions = async () => {
+  const generateQuestions = async (makeUnique = false) => {
     if (!context.groupSize && !context.ageRange && !context.vibe && !context.interests && !context.closeness) {
       toast.error('Please provide at least some context about your group')
       return
@@ -56,6 +56,14 @@ function App() {
     setIsLoading(true)
     
     try {
+      const existingQuestions = makeUnique ? questions.map(q => q.text).join('\n- ') : ''
+      
+      const uniqueInstructions = makeUnique ? `
+IMPORTANT: The following questions have already been generated. You MUST avoid these topics and create entirely NEW and MORE UNIQUE questions:
+- ${existingQuestions}
+
+Be creative and unconventional. Explore different angles, unusual perspectives, and unexpected topics that still fit the social context. Think outside the box while maintaining appropriateness.` : ''
+
       const prompt = spark.llmPrompt`You are a thoughtful conversation facilitator. Generate exactly 8 conversation questions based on the following social context:
 
 Group Size: ${context.groupSize || 'not specified'}
@@ -63,6 +71,7 @@ Age Range: ${context.ageRange || 'not specified'}
 Vibe: ${context.vibe || 'casual'}
 Interests: ${context.interests || 'general'}
 Closeness Level: ${context.closeness || 'acquaintances'}
+${uniqueInstructions}
 
 Generate questions with varying difficulty levels:
 - 2 icebreaker questions (light, easy, fun)
@@ -76,7 +85,7 @@ Make sure questions are:
 3. Respectful and inclusive
 4. Interesting and thought-provoking
 
-Return the result as a valid JSON object with a single property called "questions" that contains an array of question objects. Each question object should have "text" (the question) and "difficulty" (one of: "icebreaker", "intermediate", "deep").
+Return the result as a valid JSON object with a single property called "questions" that contains an array of question objects. Each question object should have "text" (the question) and "difficulty" (one of: "icebreaker", "intermediate", "deep", "connection").
 
 Format: 
 {
@@ -91,7 +100,7 @@ Format:
       
       if (parsed.questions && Array.isArray(parsed.questions)) {
         setQuestions(parsed.questions)
-        toast.success('Questions generated!')
+        toast.success(makeUnique ? 'More unique questions generated!' : 'Questions generated!')
       } else {
         throw new Error('Invalid response format')
       }
@@ -240,7 +249,7 @@ from https://conversation-spark--csfromcs.github.app/`
           </div>
 
           <Button
-            onClick={generateQuestions}
+            onClick={() => generateQuestions(false)}
             disabled={isLoading}
             className="w-full md:w-auto"
             size="lg"
@@ -302,12 +311,12 @@ from https://conversation-spark--csfromcs.github.app/`
                     )}
                   </Button>
                   <Button
-                    onClick={generateQuestions}
+                    onClick={() => generateQuestions(true)}
                     variant="outline"
                     size="sm"
                   >
-                    <ArrowClockwise className="mr-2" />
-                    Regenerate
+                    <Sparkle className="mr-2" weight="fill" />
+                    More Unique!
                   </Button>
                 </div>
               </div>
