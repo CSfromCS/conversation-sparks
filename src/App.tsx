@@ -128,6 +128,7 @@ Format:
 
     const formatQuestions = (questions: Question[], title: string) => {
       if (questions.length === 0) return ''
+      if(questions.length === 1) return `\n${title}\n${questions[0].text}`
       return `\n${title}\n${questions.map((q, i) => `${i + 1}. ${q.text}`).join('\n')}`
     }
 
@@ -156,7 +157,7 @@ from https://conversation-spark--csfromcs.github.app/`
       <div className="max-w-4xl mx-auto space-y-8">
         <header className="text-center space-y-3">
           <div className="flex items-center justify-center gap-3">
-            <Sparkle className="text-accent" size={40} weight="duotone" />
+            <Chats className="text-accent" size={40} weight="duotone" />
             <h1 className="text-4xl font-semibold tracking-tight text-foreground">
               Conversation Sparks
             </h1>
