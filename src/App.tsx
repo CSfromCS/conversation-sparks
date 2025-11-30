@@ -156,11 +156,11 @@ from https://conversation-spark--csfromcs.github.app/`
       <div className="max-w-4xl mx-auto space-y-8">
         <header className="text-center space-y-3">
           <div className="flex items-center justify-center gap-3">
-            <Dog className="text-primary" size={40} weight="duotone" />
+            <Dog className="text-[oklch(0.75_0.15_95)]" size={40} weight="duotone" />
             <h1 className="text-4xl font-semibold tracking-tight text-foreground">
               Conversation Sparks
             </h1>
-            <Cat className="text-primary" size={40} weight="duotone" />
+            <Cat className="text-[oklch(0.75_0.15_95)]" size={40} weight="duotone" />
           </div>
           <p className="text-lg text-muted-foreground">
             Asking the right questions to spark actually meaningful conversations.
