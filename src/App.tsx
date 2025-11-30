@@ -262,6 +262,16 @@ Format:
             </motion.div>
           )}
         </AnimatePresence>
+        <footer className="text-center text-sm text-muted-foreground">
+          <a
+            href="https://www.linkedin.com/in/csfromcs/"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4"
+          >
+            linkedin.com/in/csfromcs
+          </a>
+        </footer>
       </div>
     </div>
   )
