@@ -55,7 +55,7 @@ function App() {
     setIsLoading(true)
     
     try {
-      const prompt = spark.llmPrompt`You are a thoughtful conversation facilitator. Generate exactly 6 conversation questions based on the following social context:
+      const prompt = spark.llmPrompt`You are a thoughtful conversation facilitator. Generate exactly 10 conversation questions based on the following social context:
 
 Group Size: ${context.groupSize || 'not specified'}
 Age Range: ${context.ageRange || 'not specified'}
@@ -65,8 +65,8 @@ Closeness Level: ${context.closeness || 'acquaintances'}
 
 Generate questions with varying difficulty levels:
 - 2 icebreaker questions (light, easy, fun)
-- 2 intermediate questions (more engaging, thoughtful)
-- 2 deep questions (philosophical, introspective, meaningful)
+- 5 intermediate questions (more engaging, thoughtful)
+- 3 deep questions (philosophical, introspective, meaningful, requires relationship history to answer, connection)
 
 Make sure questions are:
 1. Contextually appropriate for the group
@@ -78,10 +78,10 @@ Return the result as a valid JSON object with a single property called "question
 
 Format: 
 {
-  "questions": [
-    {"text": "question text here", "difficulty": "icebreaker"},
-    ...more questions
-  ]
+"questions": [
+{"text": "question text here", "difficulty": "icebreaker"},
+...more questions
+]
 }`
 
       const response = await spark.llm(prompt, 'gpt-4o', true)
